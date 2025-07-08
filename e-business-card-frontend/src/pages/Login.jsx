@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // ✅ import useAuth
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { setIsAuthenticated } = useAuth(); // ✅ access setter
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,8 +30,10 @@ function Login() {
       }
 
       localStorage.setItem('token', data.token);
+      setIsAuthenticated(true); // ✅ this updates context state
       navigate('/dashboard');
     } catch (err) {
+      console.error(err);
       setError('Server error');
     }
   };
