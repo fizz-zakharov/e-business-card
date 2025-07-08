@@ -12,15 +12,6 @@ export default defineConfig(({ mode }) => {
         '@': path.resolve(__dirname, './src'),
       },
     },
-    server: {
-      proxy: {
-        '/api': {
-          target: env.VITE_SERVER_URI,
-          changeOrigin: true,
-          secure: false,
-        },
-      },
-    },
     build: {
       outDir: 'dist',
     },

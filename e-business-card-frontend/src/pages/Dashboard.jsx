@@ -14,7 +14,7 @@ function Dashboard() {
     if (!token) return;
 
     // Get current user ID
-    fetch('/api/auth/me', {
+    fetch(`${import.meta.env.VITE_SERVER_URI}/auth/me`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())
@@ -23,7 +23,7 @@ function Dashboard() {
   }, [token]);
 
   useEffect(() => {
-    const endpoint = showMine ? '/api/cards/my' : '/api/cards';
+    const endpoint = showMine ? `${import.meta.env.VITE_SERVER_URI}/cards/my` : `${import.meta.env.VITE_SERVER_URI}/cards`;
     fetch(endpoint, {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -87,7 +87,7 @@ function Dashboard() {
     if (!window.confirm('Are you sure you want to delete this card?')) return;
 
     try {
-      await fetch(`/api/cards/${id}`, {
+      await fetch(`${import.meta.env.VITE_SERVER_URI}/cards/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });

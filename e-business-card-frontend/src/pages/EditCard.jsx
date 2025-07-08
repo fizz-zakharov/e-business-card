@@ -16,7 +16,7 @@ function EditCard() {
 
   useEffect(() => {
     if (id !== 'new') {
-      fetch(`/api/cards/${id}`)
+      fetch(`${import.meta.env.VITE_SERVER_URI}/cards/${id}`)
         .then(res => res.json())
         .then(data => {
           setForm({
@@ -40,7 +40,7 @@ function EditCard() {
     setError('');
 
     const method = id === 'new' ? 'POST' : 'PUT';
-    const endpoint = id === 'new' ? '/api/cards' : `/api/cards/${id}`;
+    const endpoint = id === 'new' ? `${import.meta.env.VITE_SERVER_URI}/cards` : `${import.meta.env.VITE_SERVER_URI}/cards/${id}`;
 
     try {
       const res = await fetch(endpoint, {
